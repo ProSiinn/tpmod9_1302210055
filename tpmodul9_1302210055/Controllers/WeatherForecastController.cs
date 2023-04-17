@@ -1,33 +1,48 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace tpmodul9_1302210055.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class MahasiswaController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        static public List<Mahasiswa> listMhs = new List<Mahasiswa> {
+            new Mahasiswa("M. Yaasin Rafi", "1302210055"),
+            new Mahasiswa("Walid Hanif Ataullah", "1302213120"),
+            new Mahasiswa("Muhammad Raffa Zuhayr", "1302210068"),
+            new Mahasiswa("Sylvana Rheina Khrameliawaty", "1302210017"),
+            new Mahasiswa("Nabiel P", "1302210041")
+        };
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        // GET: api/<MahasiswaController>
+        [HttpGet]
+        public IEnumerable<Mahasiswa> Get()
         {
-            _logger = logger;
+            return listMhs;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        // GET api/<MahasiswaController>/5
+        [HttpGet("{id}")]
+        public Mahasiswa Get(int id)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return listMhs[id];
+        }
+
+        // POST api/<MahasiswaController>
+        [HttpPost]
+        public void Post([FromBody] Mahasiswa value)
+        {
+            listMhs.Add(value);
+        }
+
+
+        // DELETE api/<MahasiswaController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            listMhs.RemoveAt(id);
         }
     }
 }

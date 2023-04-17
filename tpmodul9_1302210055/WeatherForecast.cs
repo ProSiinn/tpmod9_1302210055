@@ -1,13 +1,18 @@
 namespace tpmodul9_1302210055
 {
-    public class WeatherForecast
+    public class Mahasiswa
     {
-        public DateTime Date { get; set; }
+        private string v1;
+        private string v2;
 
-        public int TemperatureC { get; set; }
+        public Mahasiswa(string v1, string v2)
+        {
+            this.v1 = v1;
+            this.v2 = v2;
+        }
 
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        private string Nama { get; set; }
 
-        public string? Summary { get; set; }
+        private string NIM { get; set; }
     }
 }
